@@ -17,7 +17,6 @@ def main():
     parser.add_argument('--url', default=os.getenv("INFLUX_URL"), help='URL to InfluxDB')
     parser.add_argument('--hostname', default=gethostname(), help='Hostname of this machine to report to Influx')
     parser.add_argument('--read-interval', type=int, default=10, help='Time in seconds between data readings')
-    parser.add_argument('--sensor-address', default=0x40, type=int, help='i2c address of the sensor. i2cdetect may help')
     parser.add_argument('-v', action='count', default=0, help='Logging verbosity. One for info, two for debug')
     args = parser.parse_args()
 
@@ -27,8 +26,8 @@ def main():
     if args.v > 1:
         loglevel = logging.DEBUG
     logging.basicConfig(level=loglevel)
-    
-    temp = TemperatureReader(args.bucket, args.org, args.token, args.url, args.hostname, sensor_addr=args.sensor_address)
+
+    temp = TemperatureReader(args.bucket, args.org, args.token, args.url, args.hostname)
     while True:
         temp.fetch_and_write_metrics()
         sleep(args.read_interval)

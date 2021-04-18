@@ -23,9 +23,9 @@ python-versions = "*"
 Adafruit-Blinka = "*"
 
 [[package]]
-name = "adafruit-circuitpython-si7021"
-version = "3.3.3"
-description = "CircuitPython library for SI7021 Temperature and Humidity Sensor."
+name = "adafruit-circuitpython-sht4x"
+version = "1.0.4"
+description = "Python library for Sensirion SHT4x temperature and humidity sensors"
 category = "main"
 optional = false
 python-versions = "*"
@@ -160,7 +160,7 @@ brotli = ["brotlipy (>=0.6.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "66d1e93d01a162f903efbb314298c6de659727bd12a75c4cc73811030b069395"
+content-hash = "cf474e770d8797a06e842b496cba9f41f05964bc457512e6cec3765795eba056"
 
 [metadata.files]
 adafruit-blinka = [
@@ -169,8 +169,8 @@ adafruit-blinka = [
 adafruit-circuitpython-busdevice = [
     {file = "adafruit-circuitpython-busdevice-5.0.6.tar.gz", hash = "sha256:9bb2934e90a151da8b7d9646b25c2ce0b3fd4853f8ba73e8faffedfd8315eda7"},
 ]
-adafruit-circuitpython-si7021 = [
-    {file = "adafruit-circuitpython-si7021-3.3.3.tar.gz", hash = "sha256:c328c936bc84f56d8b9b907d81fc2ed1c5d6d548f6dcb87feb1bad44dbb71d14"},
+adafruit-circuitpython-sht4x = [
+    {file = "adafruit-circuitpython-sht4x-1.0.4.tar.gz", hash = "sha256:4bb93dff1653400dd0a502e9ec3b2004834ef3d21d4c9e16b2ea1906d8ff8c3a"},
 ]
 adafruit-platformdetect = [
     {file = "Adafruit-PlatformDetect-3.5.0.tar.gz", hash = "sha256:40979bf7e8a24b8419ee9a0e069e68283e4ab9a8241ba71f4da95b351c2b2353"},
