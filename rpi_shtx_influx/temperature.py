@@ -31,7 +31,7 @@ class TemperatureReader:
         
         def ensure_sensor(self) -> None:
                 if not self._sensor:
-                        log.debug("Initializing temp sensor f{self._sensor_addr}")
+                        log.debug(f"Initializing temp sensor {self._sensor_addr}")
                         self._sensor_init_count += 1
                         self._sensor = adafruit_si7021.SI7021(board.I2C(), address=self._sensor_addr)
         def ensure_influx(self) -> None:
@@ -44,8 +44,10 @@ class TemperatureReader:
                 self.ensure_sensor()
                 temperature = self._sensor.temperature
                 humidity = self._sensor.relative_humidity
+                log.debug(f"Got sensor readings temperature={temperature} humidity={humidity}")
                 if self._last_temperature == temperature and self._last_humidity == humidity:
                         self._same_reading += 1
+                        log.debug(f"That's the same readings as the last {self._same_reading} times")
                 else:
                         self._same_reading = 0
                 if self._same_reading > self._max_same_reads:
@@ -61,6 +63,7 @@ class TemperatureReader:
                         f'influx_initialized,host={self._hostname}, count={self._influx_init_count}',
                 ]
         def write_metrics(self, metrics: List[str]) -> None:
+                self.ensure_influx()
                 log.debug(f"Going to write to influx: {metrics}")
                 try:
                         self._influx.write(bucket=self._bucket, record=metrics)
