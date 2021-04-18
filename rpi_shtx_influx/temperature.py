@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 
 class TemperatureReader:
         def __init__(self, bucket, org, token, url, 
-                hostname, max_same_reads=60) -> None:
+                hostname, sensor_addr=0x40, max_same_reads=60) -> None:
             self._bucket = bucket
             self._org = org
             self._token = token
@@ -27,12 +27,13 @@ class TemperatureReader:
             self._last_humidity = 0
             self._same_reading = 0
             self._max_same_reads = max_same_reads
+            self._sensor_addr = sensor_addr
         
         def ensure_sensor(self) -> None:
                 if not self._sensor:
-                        log.debug("Initializing temp sensor")
+                        log.debug("Initializing temp sensor f{self._sensor_addr}")
                         self._sensor_init_count += 1
-                        self._sensor = adafruit_si7021.SI7021(board.I2C())
+                        self._sensor = adafruit_si7021.SI7021(board.I2C(), address=self._sensor_addr)
         def ensure_influx(self) -> None:
                 if not self._influx:
                         log.debug("Initializing Influx client")
