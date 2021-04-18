@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "rpi_temperature"
+version = "1.0"
+description = "Check temperature using Raspberry Pi and SHT4 sensor"
+authors = ["Nathaniel Waisbrot <code@waisbrot.net>"]
+license = "AGPL"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+adafruit-circuitpython-si7021 = "^3.3.3"
+influxdb-client = "^1.16.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
