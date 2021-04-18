@@ -1,0 +1,27 @@
+---
+name: Publish to PyPi
+on:
+  push:
+    tags: "*"
+jobs:
+  test-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v1
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Run checks and tests
+        run: |
+          echo "no tests"
+      - name: Build package
+        run: poetry build
+      - name: Publish package
+        run: |
+          poetry publish \
+            --username=__token__ \
+            --password=${{ secrets.PYPI_UPLOAD_TOKEN }}
